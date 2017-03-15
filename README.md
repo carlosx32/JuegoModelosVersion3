@@ -1,4 +1,4 @@
-# Version2JuegoPatrones
+# Version3JuegoPatrones
 
 Version 3 del juego web aplicando el patron prototype
 
