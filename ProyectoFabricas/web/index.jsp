@@ -18,17 +18,22 @@
         <header>
             <h1> World Of CaNi </h1>
         </header>
+        <center>
         <article>
         <h2>Selecciona tu personaje</h2>
         <form method="post" action="crearPersonaje">
-             <select id="cb" name="comboBox" class="combo">   
-                <option value="Guerrero">Guerrero</option>
-                <option value="Cazador">Cazador</option>
-                <option value="Sacerdote">Sacerdote</option>
-                <option value="Brujo">Brujo</option>
-
-             </select>
+            
+                <select id="cb" name="comboBox" class="combo">   
+                    <option value="Guerrero">Guerrero</option>
+                    <option value="Cazador">Cazador</option>
+                    <option value="Sacerdote">Sacerdote</option>
+                    <option value="Brujo">Brujo</option>
+                </select>
+                <br><br>
+                <input type="number" size="15" maxlength="30" id="copias" name="copias">
+                <br>
             <input id="crear" type="submit" value="Crear">
+            </center>
         </form>
         </article>
         </body>

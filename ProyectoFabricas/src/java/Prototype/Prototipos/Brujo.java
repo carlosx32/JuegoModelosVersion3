@@ -3,55 +3,62 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fabrica.Cazador;
+package Prototype.Prototipos;
 
 import Fabrica.ArmaAbs;
 import Fabrica.BotasAbs;
+import Fabrica.Brujo.BotasDelOlvido;
+import Fabrica.Brujo.CascoDelOlvido;
+import Fabrica.Brujo.EscudoDelOlvido;
+import Fabrica.Brujo.TrajeDelOlvido;
+import Fabrica.Brujo.VaraDelOlvido;
 import Fabrica.CascoAbs;
 import Fabrica.EscudoAbs;
 import Fabrica.FabricaPjAbs;
 import Fabrica.TrajeAbs;
+
+
 /**
  *
  * @author carandy
  */
-public class Cazador implements FabricaPjAbs  {
-    static private Cazador singletonHunter;
-
-    public static FabricaPjAbs getSingleton() {
-            if(singletonHunter==null){
-            singletonHunter=new Cazador();
-        }
-        return singletonHunter;       
-    }
+public class Brujo extends PrototipoPj  {
+    static private Brujo singletonWizzard;
     
-    private Cazador(){
+    private Brujo(){
         super();
     }
     
-
+    public static FabricaPjAbs getSingleton() {
+        if(singletonWizzard==null){
+            singletonWizzard=new Brujo();
+        }
+        return singletonWizzard;       
+    }
 
     @Override
     public CascoAbs crearCasco() {
-        return new CascoDelPantano();        
+        return new CascoDelOlvido();
     }
 
     @Override
     public BotasAbs crearBotas() {
-        return new BotasDelPantano();
+        return new BotasDelOlvido();
     }
 
     @Override
     public EscudoAbs crearEscudo() {
-        return new EscudoDelPantano();
+        return new EscudoDelOlvido();
     }
+
     @Override
     public ArmaAbs crearArma() {
-        return new ArcoDelPantano();
+        return new VaraDelOlvido();
     }
 
     @Override
     public TrajeAbs crearTraje() {
-        return new PecheraDelPantano();
+        return new TrajeDelOlvido();
     }
+    
 }

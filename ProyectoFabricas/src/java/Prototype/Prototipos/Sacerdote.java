@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fabrica.Brujo;
+package Prototype.Prototipos;
+
 
 import Fabrica.ArmaAbs;
 import Fabrica.BotasAbs;
 import Fabrica.CascoAbs;
 import Fabrica.EscudoAbs;
 import Fabrica.FabricaPjAbs;
+import Fabrica.Sacerdote.BotasEspirituales;
+import Fabrica.Sacerdote.CascoEspiritual;
+import Fabrica.Sacerdote.CorazaEspiritual;
+import Fabrica.Sacerdote.EscudoEspiritual;
+import Fabrica.Sacerdote.LibroDeHechizos;
 import Fabrica.TrajeAbs;
 
 
@@ -17,43 +23,41 @@ import Fabrica.TrajeAbs;
  *
  * @author carandy
  */
-public class Brujo implements FabricaPjAbs  {
-    static private Brujo singletonWizzard;
+public class Sacerdote extends PrototipoPj {
+    static private Sacerdote singletonSac;
     
-    private Brujo(){
-        super();
+    private Sacerdote(){
+        
     }
     
     public static FabricaPjAbs getSingleton() {
-        if(singletonWizzard==null){
-            singletonWizzard=new Brujo();
+        if(singletonSac==null){
+            singletonSac=new Sacerdote();
         }
-        return singletonWizzard;       
+        return singletonSac;       
     }
 
     @Override
     public CascoAbs crearCasco() {
-        return new CascoDelOlvido();
+        return new CascoEspiritual();        
     }
 
     @Override
     public BotasAbs crearBotas() {
-        return new BotasDelOlvido();
+      return new BotasEspirituales();
     }
 
     @Override
     public EscudoAbs crearEscudo() {
-        return new EscudoDelOlvido();
+       return new EscudoEspiritual();
     }
-
     @Override
     public ArmaAbs crearArma() {
-        return new VaraDelOlvido();
+        return new LibroDeHechizos();
     }
 
     @Override
     public TrajeAbs crearTraje() {
-        return new TrajeDelOlvido();
+        return new CorazaEspiritual();
     }
-    
 }

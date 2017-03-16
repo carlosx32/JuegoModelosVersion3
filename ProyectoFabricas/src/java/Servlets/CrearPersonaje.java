@@ -8,10 +8,11 @@ package Servlets;
 import Builder.CreadordePersonajes;
 import Builder.ImplementacionPjs;
 import Builder.Personajes;
-import Fabrica.Brujo.Brujo;
-import Fabrica.Cazador.Cazador;
-import Fabrica.Guerrero.Guerrero;
-import Fabrica.Sacerdote.Sacerdote;
+import Prototype.Prototipos.Brujo;
+import Prototype.Prototipos.Cazador;
+import Prototype.Prototipos.Guerrero;
+import Prototype.Prototipos.PrototipoPj;
+import Prototype.Prototipos.Sacerdote;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,22 +25,21 @@ import javax.servlet.http.HttpServletResponse;
 public class CrearPersonaje extends HttpServlet {
     
     private CreadordePersonajes creador;
+    private Fabrica.FabricaPjAbs Pjabs;
+    private Prototype.Prototipos.PrototipoPj personajePrototipo;
         
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         creador=new CreadordePersonajes();
         creador.setConstructor(new ImplementacionPjs());   
-        this.metodoFabrica( request.getParameter("comboBox") );
+        this.metodoFabrica( request.getParameter("comboBox") );    
+        creador.ConstruirPj(Pjabs, 50,50);
+        personajePrototipo= (PrototipoPj) Pjabs;
 //aplicamos el prototype
-        
-        
-        /*       
-        request.getSession().setAttribute("Arma", personaje.crearArma().getImagenSrc());
-        request.getSession().setAttribute("Escudo", personaje.crearEscudo().getImagenSrc());
-        request.getSession().setAttribute("Botas", personaje.crearBotas().getImagenSrc());
-        request.getSession().setAttribute("Casco", personaje.crearCasco().getImagenSrc());
-        request.getSession().setAttribute("Traje", personaje.crearTraje().getImagenSrc());
-        */
+        int copias= Integer.parseInt(request.getParameter("copias")) ; 
+        for(int i=1;i<=copias;i++){
+           creador.ConstruirPj(personajePrototipo.clone(), i*200, 50);
+        }
         
         request.getSession().setAttribute("Script",  this.envScript());
         response.sendRedirect("Vistapersonaje.jsp");
@@ -50,16 +50,16 @@ public class CrearPersonaje extends HttpServlet {
     public void metodoFabrica(String comboBox){
             switch(comboBox){
             case "Guerrero":   
-                 creador.ConstruirPj(Guerrero.getSingleton(),50,50);
+                    Pjabs= Guerrero.getSingleton();
                 break;
             case "Cazador":
-                creador.ConstruirPj(Cazador.getSingleton(),50,50 );
+                    Pjabs=Cazador.getSingleton();
                 break;
             case "Sacerdote":
-                creador.ConstruirPj(Sacerdote.getSingleton(),50,50 );
+                    Pjabs=Sacerdote.getSingleton();
                 break;
             case "Brujo":
-                 creador.ConstruirPj(Brujo.getSingleton(),50,50 );
+                    Pjabs=Brujo.getSingleton();
                 break;
         }
     }

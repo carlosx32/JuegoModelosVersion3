@@ -3,56 +3,60 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fabrica.Sacerdote;
-
+package Prototype.Prototipos;
 
 import Fabrica.ArmaAbs;
 import Fabrica.BotasAbs;
 import Fabrica.CascoAbs;
+import Fabrica.Cazador.ArcoDelPantano;
+import Fabrica.Cazador.BotasDelPantano;
+import Fabrica.Cazador.CascoDelPantano;
+import Fabrica.Cazador.EscudoDelPantano;
+import Fabrica.Cazador.PecheraDelPantano;
 import Fabrica.EscudoAbs;
 import Fabrica.FabricaPjAbs;
 import Fabrica.TrajeAbs;
-
-
 /**
  *
  * @author carandy
  */
-public class Sacerdote implements FabricaPjAbs  {
-    static private Sacerdote singletonSac;
-    
-    private Sacerdote(){
-        
-    }
-    
+public class Cazador extends PrototipoPj {
+    static private Cazador singletonHunter;
+
     public static FabricaPjAbs getSingleton() {
-        if(singletonSac==null){
-            singletonSac=new Sacerdote();
+            if(singletonHunter==null){
+            singletonHunter=new Cazador();
         }
-        return singletonSac;       
+        return singletonHunter;       
     }
+    
+    private Cazador(){
+        super();
+    }
+    
+
 
     @Override
     public CascoAbs crearCasco() {
-        return new CascoEspiritual();        
+        return new CascoDelPantano();        
     }
 
     @Override
     public BotasAbs crearBotas() {
-      return new BotasEspirituales();
+        return new BotasDelPantano();
     }
 
     @Override
     public EscudoAbs crearEscudo() {
-       return new EscudoEspiritual();
+        return new EscudoDelPantano();
     }
     @Override
     public ArmaAbs crearArma() {
-        return new LibroDeHechizos();
+        return new ArcoDelPantano();
     }
 
     @Override
     public TrajeAbs crearTraje() {
-        return new CorazaEspiritual();
+        return new PecheraDelPantano();
     }
 }

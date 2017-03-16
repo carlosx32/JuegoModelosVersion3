@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fabrica.Guerrero;
+package Prototype.Prototipos;
 
 
 import Fabrica.ArmaAbs;
@@ -11,13 +11,18 @@ import Fabrica.BotasAbs;
 import Fabrica.CascoAbs;
 import Fabrica.EscudoAbs;
 import Fabrica.FabricaPjAbs;
+import Fabrica.Guerrero.BotasDelInfinito;
+import Fabrica.Guerrero.CascoDePuas;
+import Fabrica.Guerrero.Cota;
+import Fabrica.Guerrero.Espada;
+import Fabrica.Guerrero.ShieldWarrior;
 import Fabrica.TrajeAbs;
 
 /**
  *
  * @author carandy
  */
-public class Guerrero implements FabricaPjAbs  {
+public class Guerrero extends PrototipoPj  {
     static private Guerrero singletonWarrior;
     
     private Guerrero(){
