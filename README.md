@@ -1,6 +1,6 @@
 # Version4JuegoPatrones
 
-Version 4 del juego web aplicando el patron Composite
+Version 3del juego web aplicando el patron Prototype
 
 Modelos 1 
 Nicolás Góngora - 20151020008 (Autor) 
