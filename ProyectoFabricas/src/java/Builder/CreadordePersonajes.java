@@ -6,6 +6,8 @@
 package Builder;
 
 import Fabrica.FabricaPjAbs;
+import Fabrica.metodoFabrica;
+
 
 /**
  *
@@ -23,4 +25,8 @@ public class CreadordePersonajes {
     public void ConstruirPj(FabricaPjAbs pj, int x, int y){
         constructor.ConstruirPj(pj, x, y);
     }    
+
+    public void ConstruirPj(String tipo, int i, int y) {
+        ConstruirPj(new metodoFabrica().getPersonaje(tipo),i,y );
+    }
 }

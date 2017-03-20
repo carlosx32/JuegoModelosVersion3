@@ -35,7 +35,6 @@ public class Brujo extends PrototipoPj  {
         }
         return singletonWizzard;       
     }
-
     @Override
     public CascoAbs crearCasco() {
         return new CascoDelOlvido();

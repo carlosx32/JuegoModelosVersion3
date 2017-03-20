@@ -8,11 +8,7 @@ package Servlets;
 import Builder.CreadordePersonajes;
 import Builder.ImplementacionPjs;
 import Builder.Personajes;
-import Prototype.Prototipos.Brujo;
-import Prototype.Prototipos.Cazador;
-import Prototype.Prototipos.Guerrero;
-import Prototype.Prototipos.PrototipoPj;
-import Prototype.Prototipos.Sacerdote;
+import Fabrica.metodoFabrica;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,44 +21,22 @@ import javax.servlet.http.HttpServletResponse;
 public class CrearPersonaje extends HttpServlet {
     
     private CreadordePersonajes creador;
-    private Fabrica.FabricaPjAbs Pjabs;
-    private Prototype.Prototipos.PrototipoPj personajePrototipo;
-        
+       
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         creador=new CreadordePersonajes();
-        creador.setConstructor(new ImplementacionPjs());   
-        this.metodoFabrica( request.getParameter("comboBox") );    
-        creador.ConstruirPj(Pjabs, 50,50);
-        personajePrototipo= (PrototipoPj) Pjabs;
+        creador.setConstructor(new ImplementacionPjs());
+        String tipo= request.getParameter("comboBox");        
+        creador.ConstruirPj( tipo , 50,50);
 //aplicamos el prototype
         int copias= Integer.parseInt(request.getParameter("copias")) ; 
         for(int i=1;i<=copias;i++){
-           creador.ConstruirPj(personajePrototipo.clone(), i*200, 50);
+           creador.ConstruirPj(new metodoFabrica().getPersonajeProt(tipo).clone(), i*200, 50);
         }
-        
         request.getSession().setAttribute("Script",  this.envScript());
         response.sendRedirect("Vistapersonaje.jsp");
     }
     
-    
-    
-    public void metodoFabrica(String comboBox){
-            switch(comboBox){
-            case "Guerrero":   
-                    Pjabs= Guerrero.getSingleton();
-                break;
-            case "Cazador":
-                    Pjabs=Cazador.getSingleton();
-                break;
-            case "Sacerdote":
-                    Pjabs=Sacerdote.getSingleton();
-                break;
-            case "Brujo":
-                    Pjabs=Brujo.getSingleton();
-                break;
-        }
-    }
     public String envScript(){
         String script="";
         
